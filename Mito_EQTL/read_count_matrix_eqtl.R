@@ -2,7 +2,7 @@
 library(MatrixEQTL)
 
 #set work directory
-setwd("C:/Users/khuub/One Drive/OneDrive/Desktop/Projects/projects/Mito_EQTL");
+#setwd("C:/Users/khuub/One Drive/OneDrive/Desktop/Projects/projects/Mito_EQTL");
 
 #files in use
 allele = read.csv ="allele.csv";
