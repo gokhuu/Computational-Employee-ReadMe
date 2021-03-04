@@ -15,7 +15,8 @@ library(MatrixEQTL)
 allele = read.csv ="allele.csv";
 count_expression= "fpkm_expression";
 count_expression_edit = "fpkm_expression_no_zero.csv";
-count_expression_log_norm = "fpkm_expression_log_norm.csv";
+#count_expression_log_norm = "fpkm_expression_log_norm.csv";
+count_expression_log_norm = "fpkm_expression_log2_normalization.csv"
 count_expression_standard_norm = "fpkm_expression_standard_norm.csv";
 count_expression_minmax = "fpkm_expression_minmax_norm.csv"
 count_expression_normalizer = "fpkm_expression_normalizer.csv"

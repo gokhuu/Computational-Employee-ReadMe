@@ -15,6 +15,7 @@ allele = read.csv ="allele.csv";
 count_expression= "count_expression.csv";
 count_expression_edit = "count_expression_no_zero.csv";
 count_expression_log_norm = "count_expression_log_norm.csv";
+count_expression_log_norm = "read_count_log2_normalization.csv";
 count_expression_standard_norm = "count_expression_standard_norm.csv";
 count_expression_minmax = "count_expression_minmax_norm.csv"
 count_expression_normalizer = "count_expression_normalizer.csv"
