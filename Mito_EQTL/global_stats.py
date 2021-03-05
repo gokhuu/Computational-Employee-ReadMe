@@ -80,8 +80,6 @@ fpkm_data = fpkm_data.drop("Unnamed: 0", axis=1)
 fpkm_data = fpkm_data.drop("Unnamed: 0.1", axis=1)
 
 
-
-
 #Apply SK Learn preprocessing
 #read_count_data_standard, read_count_data_normalizer, read_count_data_minmax_scaler, read_count_data_robust_scaler = apply_scalers(read_count_data)
 #fpkm_data_standard, fpkm_data_normalizer, fpkm_data_minmax_scaler, fpkm_data_robust_scaler = apply_scalers(fpkm_data)
