@@ -76,21 +76,26 @@ read_count_data = read_count_data.drop('Mean', axis=1)
 fpkm_threshold_list = threshold_data(raw_fpkm_data,2)
 fpkm_data = raw_fpkm_data.drop(fpkm_threshold_list)
 fpkm_data = fpkm_data.drop('Mean', axis=1)
+fpkm_data = fpkm_data.drop("Unnamed: 0", axis=1)
+fpkm_data = fpkm_data.drop("Unnamed: 0.1", axis=1)
+
+
+
 
 #Apply SK Learn preprocessing
-read_count_data_standard, read_count_data_normalizer, read_count_data_minmax_scaler, read_count_data_robust_scaler = apply_scalers(read_count_data)
-fpkm_data_standard, fpkm_data_normalizer, fpkm_data_minmax_scaler, fpkm_data_robust_scaler = apply_scalers(fpkm_data)
+#read_count_data_standard, read_count_data_normalizer, read_count_data_minmax_scaler, read_count_data_robust_scaler = apply_scalers(read_count_data)
+#fpkm_data_standard, fpkm_data_normalizer, fpkm_data_minmax_scaler, fpkm_data_robust_scaler = apply_scalers(fpkm_data)
 
 #apply log2+1 normalization
-fpkm_log = log_normalization(fpkm_data)
-read_count_data_log = log_normalization(read_count_data)
+#fpkm_log = log_normalization(fpkm_data)
+#read_count_data_log = log_normalization(read_count_data)
 
 #Load log2 data
 #read_count_log2 = pd.read_csv('read_count_log2_normalization.csv')
 #fpkm_log2 = pd.read_csv('fpkm_expression_log2_normalization.csv')
 
 
-
+'''
 #update csv files
 raw_read_count_data.to_csv(r'count_expression.csv')
 read_count_data.to_csv(r'count_expression_no_zero.csv')
@@ -107,7 +112,7 @@ fpkm_data_standard.to_csv(r'fpkm_data_standard.csv')
 fpkm_data_normalizer.to_csv(r'fpkm_expression_normalizer.csv')
 fpkm_data_minmax_scaler.to_csv(r'fpkm_expression_minmax_norm.csv')
 fpkm_data_robust_scaler.to_csv(r'fpkm_expression_robust.csv')
-
+'''
 
 '''
 #Global Stats
