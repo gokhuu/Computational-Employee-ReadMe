@@ -72,6 +72,9 @@ fpkm_data_standard, fpkm_data_normalizer, fpkm_data_minmax_scaler, fpkm_data_rob
 #fpkm_log = log_normalization(fpkm_data)
 #read_count_data_log = log_normalization(read_count_data)
 
+#Load log2 data
+read_count_log2 = pd.read_csv('read_count_log2_normalization.csv')
+fpkm_log2 = pd.read_csv('fpkm_expression_log2_normalization.csv')
 
 
 
