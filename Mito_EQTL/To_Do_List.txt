@@ -1,0 +1,8 @@
+To-Do List
+
+-Global stats
+-append Gene ID column to tables
+-re run matrix eqtl with new normalization
+-plot by hand p-value
+	hist
+	qq plot
