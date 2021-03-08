@@ -2,8 +2,8 @@ library(MatrixEQTL)
 #import library
 
 #set work directory
-#setwd("C:/Users/khuub/One Drive/OneDrive/Desktop/Projects/projects/Mito_EQTL");
-setwd("/home/brandon/workspace/projects/Mito_EQTL")
+setwd("C:/Users/khuub/One Drive/OneDrive/Desktop/Projects/projects/Mito_EQTL");
+#setwd("/home/brandon/workspace/projects/Mito_EQTL")
 
 
 #files in use
@@ -43,7 +43,7 @@ gene_log$fileOmitCharacters = "NA";
 gene_log$fileSkipRows = 1;
 gene_log$fileSkipColumns = 1;
 gene_log$fileSliceSize = 2000;
-gene_log$LoadFile("count_expression_log2.csv");
+gene_log$LoadFile("fpkm_expression_log2.csv");
 
 #Expression - SK Learn StandardScaler
 gene_stan = SlicedData$new();
@@ -52,7 +52,7 @@ gene_stan$fileOmitCharacters = "NA";
 gene_stan$fileSkipRows = 1;
 gene_stan$fileSkipColumns = 1;
 gene_stan$fileSliceSize = 2000;
-gene_stan$LoadFile("Count_Expression_INT.csv");
+gene_stan$LoadFile("fpkm_expression_INT.csv");
 
 #covariates
 cvrt_applied = SlicedData$new();
@@ -75,7 +75,7 @@ me_log_cv = Matrix_eQTL_engine(
   errorCovariance = errorCovariance,
   verbose = TRUE,
   pvalue.hist = TRUE,
-  min.pv.by.genesnp = FALSE,
+  min.pv.by.genesnp = TRUE,
   noFDRsaveMemory = FALSE
 );
 
@@ -92,7 +92,7 @@ me_log_cv_qq = Matrix_eQTL_engine(
   errorCovariance = errorCovariance,
   verbose = TRUE,
   pvalue.hist = "qqplot",
-  min.pv.by.genesnp = FALSE,
+  min.pv.by.genesnp = TRUE,
   noFDRsaveMemory = FALSE
 );
 
@@ -109,7 +109,7 @@ me_stan_cv = Matrix_eQTL_engine(
   errorCovariance = errorCovariance,
   verbose = TRUE,
   pvalue.hist = TRUE,
-  min.pv.by.genesnp = FALSE,
+  min.pv.by.genesnp = TRUE,
   noFDRsaveMemory = FALSE
 );
 
@@ -126,7 +126,7 @@ me_stan_cv_qq = Matrix_eQTL_engine(
   errorCovariance = errorCovariance,
   verbose = TRUE,
   pvalue.hist = "qqplot",
-  min.pv.by.genesnp = FALSE,
+  min.pv.by.genesnp = TRUE,
   noFDRsaveMemory = FALSE
 );
 
@@ -136,12 +136,12 @@ unlink(output_file_name)
 #log normalized data
 cat('Analysis done in: ', me_log_cv$time.in.sec, ' seconds', '\n');
 cat('Detected eQTLs:', '\n');
-show(me_log$all$eqtls)
+show(me_log_cv$all$eqtls)
 
 #standard noramlized data
 cat('Analysis done in: ', me_stan_cv$time.in.sec, ' seconds', '\n');
 cat('Detected eQTLs:', '\n');
-show(me_stan$all$eqtls)
+show(me_stan_cv$all$min.pv.gene)
 
 #log normlized data
 plot(me_log_cv)
