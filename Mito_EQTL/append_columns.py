@@ -3,23 +3,13 @@
 import numpy as np 
 import pandas as pd
 
+def gene_list(lst1, lst2):
+	final = []
 
-def threshold_list(df,n):
-	df["Mean"] = df.mean(axis=1)
-	l = len(df.iloc[:,0])
-	lst = []
+	for i in lst1:
+		final.append(lst2[i])
 
-	for i in range(l):
-		if df.Mean[i] < n:
-			lst.append(i)
-
-	return lst
-
-def drop_genes(lst, gene):
-	for i in lst:
-		gene = gene.drop(i)
-
-	return gene
+	return final
 
 #Load data
 #read count data
@@ -39,8 +29,22 @@ gene_data = pd.read_csv('expression_desc.csv')
 gene_id = gene_data.iloc[:,3]
 
 #threshold_list
-rc_thresh_list = threshold_list(raw_rc_data,10)
+col = rc_data.iloc[:,0]
+cols = fpkm_data.iloc[:,0]
 
-rc_genes = drop_genes(rc_thresh_list,gene_id)
+rc_gene_col = gene_list(col, gene_id)
+fpkm_gene_col = gene_list(cols, gene_id)
 
-print(len(rc_thresh_list))
+raw_rc_data.insert(0, 'Gene', gene_id)
+rc_data.insert(0, 'Gene', rc_gene_col)
+rc_data_log2.insert(0, 'Gene', rc_gene_col)
+rc_data_int.insert(0,'Gene', rc_gene_col)
+
+
+print(len(fpkm_data_log2.iloc[:,0]))
+'''
+raw_fpkm_data.insert(0, 'Gene', gene_id)
+fpkm_data.insert(0, 'Gene', fpkm_gene_col)
+fpkm_data_log2.insert(0, 'Gene', fpkm_gene_col)
+fpkm_data_int.insert(0,'Gene', fpkm_gene_col)
+'''
