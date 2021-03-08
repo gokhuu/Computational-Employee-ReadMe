@@ -4,18 +4,21 @@ import numpy as np
 import pandas as pd 
 import math
 
-def log_normalization(df):
-	dim_x = len(df.columns)
-	dim_y = len(df.iloc[:,0])
+def threshold_data(df,l,n):
+	df["Mean"] = df.mean(axis=1)
+	lst = []
 
-	for i in range(dim_x):
-		for j in range(dim_y):
-			df.iloc[j,i] = math.log2(1+df.iloc[j,i])
+	
+	for i in range(l):
+		if df.Mean[i] < n:
+			lst.append(i)
 
-	return df
+	return lst
 
-fpkm = pd.read_csv('fpkm_expression_no_zero.csv')
+raw_fpkm = pd.read_csv('fpkm_expression.csv')
 
-log2_fpkm = log_normalization(fpkm)
+l = len(raw_fpkm.iloc[:,0])
 
-print(len(log2_fpkm.iloc[:,2]))
+x = threshold_data(raw_fpkm, l, 2)
+
+print(x)
