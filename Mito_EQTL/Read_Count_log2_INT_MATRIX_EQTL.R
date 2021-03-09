@@ -43,7 +43,7 @@ gene_log$fileOmitCharacters = "NA";
 gene_log$fileSkipRows = 1;
 gene_log$fileSkipColumns = 1;
 gene_log$fileSliceSize = 2000;
-gene_log$LoadFile("fpkm_expression_log2.csv");
+gene_log$LoadFile("count_expression_log2.csv");
 
 #Expression - SK Learn StandardScaler
 gene_stan = SlicedData$new();
@@ -52,7 +52,7 @@ gene_stan$fileOmitCharacters = "NA";
 gene_stan$fileSkipRows = 1;
 gene_stan$fileSkipColumns = 1;
 gene_stan$fileSliceSize = 2000;
-gene_stan$LoadFile("fpkm_expression_INT.csv");
+gene_stan$LoadFile("count_expression_INT.csv");
 
 #covariates
 cvrt_applied = SlicedData$new();
@@ -136,12 +136,14 @@ unlink(output_file_name)
 #log normalized data
 cat('Analysis done in: ', me_log_cv$time.in.sec, ' seconds', '\n');
 cat('Detected eQTLs:', '\n');
-show(me_log_cv$all$eqtls)
+y = me_log_cv$all$min.pv.gene;
+write.csv(y, 'count_log2_pvalues.csv')
 
 #standard noramlized data
 cat('Analysis done in: ', me_stan_cv$time.in.sec, ' seconds', '\n');
 cat('Detected eQTLs:', '\n');
-show(me_stan_cv$all$min.pv.gene)
+x = me_stan_cv$all$min.pv.gene;
+write.csv(x, 'count_INT_pvalues.csv')
 
 #log normlized data
 plot(me_log_cv)
