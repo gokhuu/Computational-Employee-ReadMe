@@ -1,0 +1,38 @@
+---
+title: "15q_dup"
+author: "Brandon"
+date: "4/8/2021"
+output: html_document
+---
+#load working directory and library
+```{r setup, include=FALSE}
+setwd("C:/Users/khuub/One Drive/OneDrive/Desktop/Projects/projects/Autism_edgeR/")
+library(edgeR)
+```
+
+#load data
+```{r}
+counts <- read.csv("15q_dup_fpkm.csv")
+m = as.matrix(counts)
+g <- c('Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case')
+```
+
+#create DGE List
+```{r}
+d <- DGEList(counts = m, group = g)
+```
+
+#calcNormFactors
+```{r}
+d <- calcNormFactors(d)
+```
+
+#common dispersion
+```{r}
+d <- estimateCommonDisp(d)
+```
+
+#exact test
+```{r}
+de.com <- exactTest(d)
+```
