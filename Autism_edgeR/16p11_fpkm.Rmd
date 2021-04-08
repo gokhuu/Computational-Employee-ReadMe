@@ -29,7 +29,7 @@ d <- calcNormFactors(d)
 
 #common dispersion
 ```{r}
-d <- estimateCommonDisp(d)
+d <- estimateCommonDisp(d,pair=c("Case","Control"))
 ```
 
 #exact test

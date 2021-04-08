@@ -6,7 +6,7 @@ import seaborn as sns
 
 df15 = pd.read_csv('16p11_pval.csv',header=0)
 
-sns.distplot(df15['pvalue w/ covariates'],hist=True, kde=True,bins=int(180/5),color='darkblue',hist_kws={'edgecolor':'black'},kde_kws={'linewidth':4})
+sns.distplot(df15['Pvalue w/ covariates'],hist=True, kde=True,bins=int(180/5),color='darkblue',hist_kws={'edgecolor':'black'},kde_kws={'linewidth':4})
 plt.title('16p11 w/covariate pval density histogram')
 plt.xlabel('P Value')
 plt.ylabel('Density')

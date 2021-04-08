@@ -14,7 +14,7 @@ library(edgeR)
 ```{r}
 counts <- read.csv("16p11_fpkm.csv")
 m = as.matrix(counts)
-g <- c('Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','case')
+g <- c('Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case')
 ```
 
 #create DGE List
@@ -39,7 +39,7 @@ d <- estimateDisp(d,design=co)
 
 #exact test
 ```{r}
-de.com <- exactTest(d)
+de.com <- exactTest(d,pair=c("Case","Control"))
 topTags(de.com)
 ```
 #output pvalue
@@ -49,5 +49,5 @@ write.csv(pval,"16p11_pval_with_covar.csv")
 ```
 
 ```{r}
-write.csv(de.com$table, "16p11_covar_full_table.csv")
+write.csv(de.com$table, "table.csv")
 ```

@@ -24,7 +24,7 @@ d <- DGEList(counts = m, group = g)
 
 #calcNormFactors
 ```{r}
-d <- calcNormFactors(d)
+d <- calcNormFactors(d,pair=c("Case","Control"))
 ```
 
 #common dispersion

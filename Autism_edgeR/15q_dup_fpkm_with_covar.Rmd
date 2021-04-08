@@ -39,7 +39,7 @@ d <- estimateDisp(d,design=co)
 
 #exact test
 ```{r}
-de.com <- exactTest(d)
+de.com <- exactTest(d,pair=c("Case","Control"))
 topTags(de.com)
 ```
 #output pvalue
