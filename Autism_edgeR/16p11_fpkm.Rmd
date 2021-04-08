@@ -37,6 +37,10 @@ d <- estimateCommonDisp(d,pair=c("Case","Control"))
 de.com <- exactTest(d)
 topTags(de.com)
 ```
+
+```{r}
+write.csv(de.com$table$pvalue, "16p11_pval.csv")
+```
 #output pvalue
 ```{r}
 pval <- de.com$table$PValue

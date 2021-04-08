@@ -6,7 +6,7 @@ output: html_document
 ---
 #load working directory and library
 ```{r setup, include=FALSE}
-#setwd("C:/Users/khuub/One Drive/OneDrive/Desktop/Projects/projects/Autism_edgeR/")
+setwd("C:/Users/khuub/One Drive/OneDrive/Desktop/Projects/projects/Autism_edgeR/")
 library(edgeR)
 ```
 
@@ -49,5 +49,5 @@ write.csv(pval,"16p11_pval_with_covar.csv")
 ```
 
 ```{r}
-write.csv(de.com$table, "table.csv")
+write.csv(de.com$table, "16p11_table_covar.csv")
 ```
