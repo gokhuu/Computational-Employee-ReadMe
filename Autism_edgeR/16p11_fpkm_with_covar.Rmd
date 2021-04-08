@@ -1,0 +1,53 @@
+---
+title: "15q_dup"
+author: "Brandon"
+date: "4/8/2021"
+output: html_document
+---
+#load working directory and library
+```{r setup, include=FALSE}
+setwd("C:/Users/khuub/One Drive/OneDrive/Desktop/Projects/projects/Autism_edgeR/")
+library(edgeR)
+```
+
+#load data
+```{r}
+counts <- read.csv("16p11_fpkm.csv")
+m = as.matrix(counts)
+g <- c('Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','case')
+```
+
+#create DGE List
+```{r}
+d <- DGEList(counts = m, group = g)
+```
+
+#calcNormFactors
+```{r}
+d <- calcNormFactors(d)
+```
+
+#load covariates
+```{r}
+co <- read.csv('16p11_pc1.csv',header=FALSE)
+```
+
+#common dispersion
+```{r}
+d <- estimateDisp(d,design=co)
+```
+
+#exact test
+```{r}
+de.com <- exactTest(d)
+topTags(de.com)
+```
+#output pvalue
+```{r}
+pval <- de.com$table$PValue
+write.csv(pval,"16p11_pval_with_covar.csv")
+```
+
+```{r}
+write.csv(de.com$table, "16p11_covar_full_table.csv")
+```

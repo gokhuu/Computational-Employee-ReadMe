@@ -3,11 +3,8 @@
 import numpy as np 
 import pandas as pd 
 
-'''
-df = pd.read_csv('new_exp_all.txt', sep='\t', low_memory=False)
+df = pd.read_csv('16p11_pc.txt',sep='\t', header=None)
 
-fpkm=df.iloc[:,76:147]
+x = df.iloc[:,0]
 
-fpkm.to_csv(r'15qdup_fpkm.csv')
-
-'''
+x.to_csv('16p11_pc1.csv')

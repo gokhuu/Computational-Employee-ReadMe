@@ -27,12 +27,27 @@ d <- DGEList(counts = m, group = g)
 d <- calcNormFactors(d)
 ```
 
+#load covariates
+```{r}
+co <- read.csv('15qdup_pc1.csv',header=FALSE)
+```
+
 #common dispersion
 ```{r}
-d <- estimateDisp(d)
+d <- estimateDisp(d,design=co)
 ```
 
 #exact test
 ```{r}
 de.com <- exactTest(d)
+topTags(de.com)
+```
+#output pvalue
+```{r}
+pval <- de.com$table$PValue
+write.csv(pval,"15qdup_pval_with_covar.csv")
+```
+
+```{r}
+write.csv(de.com$table, "15qdup_covar_full_table.csv")
 ```
