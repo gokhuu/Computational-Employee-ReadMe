@@ -38,5 +38,5 @@ de.com <- exactTest(d)
 ```
 
 ```{r}
-write.csv(de.com$table$PValue,"15p_dup_pval.csv")
+write.csv(de.com$table$PValue,"15p_dup_pval_redo.csv")
 ```

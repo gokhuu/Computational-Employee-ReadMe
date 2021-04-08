@@ -45,9 +45,9 @@ topTags(de.com)
 #output pvalue
 ```{r}
 pval <- de.com$table$PValue
-write.csv(pval,"15qdup_pval_with_covar.csv")
+write.csv(pval,"15qdup_pval_with_covar_redo.csv")
 ```
 
 ```{r}
-write.csv(de.com$table, "15qdup_covar_full_table.csv")
+write.csv(de.com$table, "15qdup_covar_full_table_redo.csv")
 ```
