@@ -6,7 +6,7 @@ output: html_document
 ---
 #load working directory and library
 ```{r setup, include=FALSE}
-setwd("C:/Users/khuub/One Drive/OneDrive/Desktop/Projects/projects/Autism_edgeR/")
+#setwd("C:/Users/khuub/One Drive/OneDrive/Desktop/Projects/projects/Autism_edgeR/")
 library(edgeR)
 ```
 
@@ -29,10 +29,14 @@ d <- calcNormFactors(d,pair=c("Case","Control"))
 
 #common dispersion
 ```{r}
-d <- estimateDisp(d)
+d <- estimateCommonDisp(d)
 ```
 
 #exact test
 ```{r}
 de.com <- exactTest(d)
+```
+
+```{r}
+write.csv(de.com$table$PValue,"15p_dup_pval.csv")
 ```
