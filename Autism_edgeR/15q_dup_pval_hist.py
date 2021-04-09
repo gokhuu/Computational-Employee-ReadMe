@@ -6,6 +6,8 @@ import seaborn as sns
 
 df15 = pd.read_csv('15q_dup_pval.csv', header=0)
 
+print(df15.head())
+
 sns.distplot(df15['p_value w/ covariate'], hist=True, kde=True, bins=int(180 / 5), color='darkblue', hist_kws={'edgecolor': 'black'}, kde_kws={'linewidth': 4})
 
 
