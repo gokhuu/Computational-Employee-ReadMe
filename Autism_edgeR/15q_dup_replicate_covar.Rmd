@@ -4,22 +4,99 @@ author: "Brandon"
 date: "4/9/2021"
 output: html_document
 ---
+
+
 #load working directory and library
 ```{r setup, include=FALSE}
 setwd("C:/Users/khuub/One Drive/OneDrive/Desktop/Projects/projects/Autism_edgeR/")
 library(edgeR)
 ```
 
+#Possibly try as.factor()
 ```{r}
-counts <- read.csv("15q_dup_fpkm.csv")
-m = as.matrix(counts)
-groups <- c('PGP1','PGP1','PGP1','GM23716','GM23716','GM23716','GM23720','GM23720','GM23720','GM25256','GM25256','GM25256','BXS0110','BXS0110','BXS0110','BXS0111','BXS0111','BXS0111','BYS0112','BYS0112','BYS0112','BXS0114','BXS0114','BXS0114','BXS0115','BXS0115','BXS0115','BXS0116','BXS0116','BXS0116','BXS0117','BXS0117','BXS0117','902','902','902','1601','1601','1601','1401','1401','1401','1001','1001','1001','901','901','901')
+counts <- read.csv("15q_dup_fpkm_threshold_no_index.csv",header=TRUE)
+m <- as.matrix(counts)
+repl <- as.factor(c('PGP1','PGP1','PGP1','GM23716','GM23716','GM23716','GM23720','GM23720','GM23720','GM25256','GM25256','GM25256','BXS0110','BXS0110','BXS0110','BXS0111','BXS0111','BXS0111','BYS0112','BYS0112','BYS0112','BXS0114','BXS0114','BXS0114','BXS0115','BXS0115','BXS0115','BXS0116','BXS0116','BXS0116','BXS0117','BXS0117','BXS0117','902','902','902','1601','1601','1601','1401','1401','1401','1001','1001','1001','901','901','901'))
 
-replicate <- c('Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case')
+group <- as.factor(c('Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case'))
 
 co <- read.csv('15qdup_pc1.csv',header=FALSE)
 ```
 
 ```{r}
-d <- DGEList(counts = m, group=groups)
+d <- DGEList(counts = m, group=group)
 ```
+
+#add $replicate
+```{r}
+d$samples$replicate <- repl
+```
+
+```{r}
+keep <- filterByExpr(d,group=group)
+d <- d[keep,,keep.lib.sizes=FALSE]
+```
+
+```{r}
+d <- calcNormFactors(d, method = "TMM")
+```
+
+```{r}
+#design <- model.matrix(~0 + group + repl,co)
+#colnames(design) <- gsub("group", "", colnames(design))
+```
+
+```{r}
+design = read.csv("15q_new_design_mat.csv")
+```
+
+```{r}
+contr.mat <- makeContrasts(CasevCon = Control-Case, levels = colnames(design))
+```
+
+```{r}
+par(mfrow=c(1,2))
+v <- voom(d,design,plot=TRUE)
+```
+
+```{r}
+vfit = lmFit(v,design)
+vfit = contrasts.fit(vfit,contrasts = contr.mat)
+efit = eBayes(vfit)
+plotSA(efit, main="Mean Variance Trend")
+```
+
+```{r}
+summary(decideTests(efit))
+```
+
+```{r}
+tfit <- treat(vfit, lfc=1)
+dt <- decideTests(tfit)
+summary(dt)
+```
+# 
+# ```{r}
+# d <- estimateDisp(d,design,robust = TRUE)
+# ```
+# 
+# 
+# ```{r}
+# fit <- glmFit(d, design = design)
+# lrt <- glmLRT(fit,coef=2)
+# topTags(lrt)
+# ```
+# 
+# 
+# ```{r}
+# e <- exactTest(d, pair=c("Control","Case"),dispersion = 0.05)
+# ```
+# 
+# ```{r}
+# topTags(e)
+# ```
+# 
+# ```{r}
+# write.csv(e$table$PValue,"15q_pval_thresh_3.csv")
+```
+
