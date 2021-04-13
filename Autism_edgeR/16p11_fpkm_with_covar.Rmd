@@ -14,7 +14,7 @@ library(edgeR)
 ```{r}
 counts <- read.csv("16p11_fpkm.csv")
 m = as.matrix(counts)
-g <- c('Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case')
+g <- c('Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control.BYS0112','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case')
 ```
 
 #create DGE List

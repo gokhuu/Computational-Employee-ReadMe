@@ -14,7 +14,7 @@ library(edgeR)
 ```{r}
 counts <- read.csv("15q_dup_fpkm.csv")
 m = as.matrix(counts)
-g <- c('Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case')
+g <- c('Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control.BYS0112','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case')
 ```
 
 #create DGE List
@@ -38,5 +38,5 @@ de.com <- exactTest(d)
 ```
 
 ```{r}
-write.csv(de.com$table$PValue,"15p_dup_pval_redo.csv")
+print(de.com$table$PValue)
 ```

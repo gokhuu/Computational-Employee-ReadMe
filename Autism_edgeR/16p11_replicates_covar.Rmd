@@ -1,0 +1,55 @@
+---
+title: "16p11_replicates"
+author: "Brandon"
+date: "4/9/2021"
+output: html_document
+---
+#load working directory and library
+```{r setup, include=FALSE}
+setwd("C:/Users/khuub/One Drive/OneDrive/Desktop/Projects/projects/Autism_edgeR/")
+library(edgeR)
+```
+
+```{r}
+counts <- read.csv("16p11_fpkm.csv")
+m = as.matrix(counts)
+groups <- c('Control.PGP1','Control.PGP1','Control.PGP1','Control.GM23716','Control.GM23716','Control.GM23716','Control.GM23720','Control.GM23720','Control.GM23720','Control.GM25256','Control.GM25256','Control.GM25256','Control.BXS0110','Control.BXS0110','Control.BXS0110','Control.BXS0111','Control.BXS0111','Control.BXS0111','Control.BYS0112','Control.BYS0112','Control.BYS0112','Control.BXS0114','Control.BXS0114','Control.BXS0114','Control.BXS0115','Control.BXS0115','Control.BXS0115','Control.BXS0116','Control.BXS0116','Control.BXS0116','Control.BXS0117','Control.BXS0117','Control.BXS0117','Control.902','Control.902','Control.902','Case.14758X3','Case.14758X3','Case.14758X3','Case.14799X1','Case.14799X1','Case.14799X1','Case.14824X13','Case.14824X13','Case.14824X13','Case.14763x7','Case.14763x7','Case.14763x7','Case.14739x3','Case.14739x3','Case.14765x2','Case.14765x2','Case.14765x2','Case.14710x6','Case.14781x16','Case.14781x16','Case.14781x16','Case.14746x8','Case.14746x8')
+```
+
+#create DGE List
+```{r}
+d <- DGEList(counts = m, group = groups)
+```
+
+#calc norm factors
+```{r}
+d <- calcNormFactors(d)
+```
+
+#load covariates
+```{r}
+co <- read.csv('16p11_pc1.csv',header=FALSE)
+```
+
+#design matrix
+```{r}
+design <-read.csv("design_mat.csv",header = TRUE)
+design <- as.matrix(design)
+```
+
+```{r}
+d <- estimateDisp(d,design)
+```
+
+```{r}
+fit <- glmFit(d, design = design)
+lrt <- glmLRT(fit,coef=2)
+```
+
+```{r}
+topTags(lrt)
+```
+
+```{r}
+write.csv(pval,'16p11_pval_rep_covar.csv')
+```

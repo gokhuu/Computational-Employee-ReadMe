@@ -1,0 +1,25 @@
+---
+title: "15q_dup"
+author: "Brandon"
+date: "4/9/2021"
+output: html_document
+---
+#load working directory and library
+```{r setup, include=FALSE}
+setwd("C:/Users/khuub/One Drive/OneDrive/Desktop/Projects/projects/Autism_edgeR/")
+library(edgeR)
+```
+
+```{r}
+counts <- read.csv("15q_dup_fpkm.csv")
+m = as.matrix(counts)
+groups <- c('PGP1','PGP1','PGP1','GM23716','GM23716','GM23716','GM23720','GM23720','GM23720','GM25256','GM25256','GM25256','BXS0110','BXS0110','BXS0110','BXS0111','BXS0111','BXS0111','BYS0112','BYS0112','BYS0112','BXS0114','BXS0114','BXS0114','BXS0115','BXS0115','BXS0115','BXS0116','BXS0116','BXS0116','BXS0117','BXS0117','BXS0117','902','902','902','1601','1601','1601','1401','1401','1401','1001','1001','1001','901','901','901')
+
+replicate <- c('Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Control','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case','Case')
+
+co <- read.csv('15qdup_pc1.csv',header=FALSE)
+```
+
+```{r}
+d <- DGEList(counts = m, group=groups)
+```

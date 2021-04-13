@@ -43,11 +43,7 @@ de.com <- exactTest(d,pair=c("Case","Control"))
 topTags(de.com)
 ```
 #output pvalue
-```{r}
-pval <- de.com$table$PValue
-write.csv(pval,"15qdup_pval_with_covar_redo.csv")
-```
 
 ```{r}
-write.csv(de.com$table, "15qdup_covar_full_table_redo.csv")
-```
+write.csv(de.com$table$pval,"15q_dup_pval_covar_redo.csv")
+write.csv(de.come$table,"15q_dup_covar_full_table.csvR")
