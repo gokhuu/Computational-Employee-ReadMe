@@ -1,7 +1,6 @@
 #python 3
-
-def test():
-	print('hello world')
+import numpy as np 
+import pandas as pd 
 
 def count_elements(lst):
 	l = []
@@ -36,5 +35,45 @@ def create_whole_df(lst_df, lst_gene):
 		for j in lst_df:
 			temp.append(j[j['Gene Symbol'] == i])
 		lst.append(temp)
+
+	return lst
+
+def compare_lists(brain, autism):
+	lst = []
+
+	for i in brain:
+		for j in autism:
+			if i == j:
+				lst.append(i)
+			else:
+				continue
+	return lst
+
+
+def create_new_df(df,lst):
+	l = []
+
+	for i in lst:
+		l.append(df[df['Short Gene Name'] == i])
+
+	subset = pd.concat(l)
+
+	return subset
+
+def create_brain_df(df, genes):
+	lst = []
+
+	for i in genes:
+		lst.append(df[df['Gene Symbol']]==i)
+
+	subset = pd.concat(lst)
+
+	return lst 
+
+def concat_brain_df(brain,genes):
+	lst = []
+
+	for i in brain:
+		lst.append(create_brain_df(i,genes))
 
 	return lst
