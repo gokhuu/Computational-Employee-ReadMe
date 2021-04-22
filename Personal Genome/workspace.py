@@ -16,17 +16,27 @@ from tensorflow import keras
 from tensorflow.keras import layers
 
 clf = keras.Sequential([
-	layers.Dense(units=20, activation='relu', input_shape=[11300]),
-	layers.Dense(units=10, activation='relu'),
-	layers.Dense(units=5, activation='relu'),
-	layers.Dense(units=1)
+	layers.Dense(units=11300, activation='relu', input_shape=[11300]),
+	layers.Dense(units=10000, activation='relu'),
+	layers.Dense(units=5000, activation='relu'),
+	layers.Dense(units=2500, activation='relu'),
+	layers.Dense(units=1000, activation='relu'),
+	layers.Dense(units=500, activation='relu'),
+	layers.Dense(units=300, activation='relu'),
+	layers.Dense(units=200, activation='relu'),
+	layers.Dense(units=100, activation='relu'),
+	layers.Dense(units=50, activation='relu'),
+	layers.Dense(units=1, activation='sigmoid')
 	])
 
 clf.compile(
 	optimizer='adam',
-	loss='mae',
+	loss='binary_crossentropy',
 	metrics=['accuracy']
 	)
 
-clf.fit(train_x,train_y,batch_size=50,epochs=100,verbose=0)
+clf.fit(train_x,train_y,batch_size=50,epochs=1000,verbose=0)
 print(clf.evaluate(train_x,train_y))
+
+
+
