@@ -1,9 +1,7 @@
 #python3
 import numpy as np 
 import pandas as pd 
-import matplotlib.pyplot as plt 
-import seaborn as sns 
-'''
+
 #Autism fpkm files
 df = pd.read_csv('Organoid Files/all_autism_fpkm_T.csv',header=0,index_col=0)
 
@@ -18,20 +16,17 @@ from tensorflow import keras
 from tensorflow.keras import layers
 
 clf = keras.Sequential([
-	layers.Dense(units=11300, activation='relu', input_shape=[11300]),
-	layers.Dense(units=1, activation='sigmoid')
+	layers.Dense(units=20, activation='relu', input_shape=[11300]),
+	layers.Dense(units=10, activation='relu'),
+	layers.Dense(units=5, activation='relu'),
+	layers.Dense(units=1)
 	])
 
 clf.compile(
 	optimizer='adam',
-	loss='binary_crossentropy',
+	loss='mae',
 	metrics=['accuracy']
 	)
 
-clf.fit(train_x,train_y,batch_size=50,epochs=1000,verbose=0)
+clf.fit(train_x,train_y,batch_size=50,epochs=100,verbose=0)
 print(clf.evaluate(train_x,train_y))
-'''
-
-df = pd.read_csv('Organoid Files/all_autism_fpkm_iqr_1.5_outliers.csv', header=0, index_col=0)
-
-sns.pairplot(df,hue='Autism')

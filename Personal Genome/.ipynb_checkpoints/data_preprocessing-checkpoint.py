@@ -33,4 +33,4 @@ df = df.set_index(y)
 
 df_t = df.T
 
-#df_t.to_csv(r'all_autism_fpkm_t_threshold.csv')
+df_t.to_csv(r'all_autism_fpkm_t_threshold.csv')
