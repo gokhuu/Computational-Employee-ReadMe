@@ -44,8 +44,7 @@ list_of_filenames = [
 'VCFs/ED16.Filtered.Variants.vcf','VCFs/ED17.Filtered.Variants.vcf','VCFs/ED18.Filtered.Variants.vcf',
 'VCFs/ED19.Filtered.Variants.vcf','VCFs/ED20.Filtered.Variants.vcf','VCFs/ED21.Filtered.Variants.vcf',
 'VCFs/ED22.Filtered.Variants.vcf','VCFs/ED23.Filtered.Variants.vcf','VCFs/ED24.Filtered.Variants.vcf',
-'VCFs/ED25.Filtered.Variants.vcf','VCFs/ED26.Filtered.Variants.vcf',
-]
+'VCFs/ED25.Filtered.Variants.vcf','VCFs/ED26.Filtered.Variants.vcf']
 
 
 list_of_csv = [
@@ -55,8 +54,7 @@ list_of_csv = [
 'VCFs/VCF_csv/ED13.csv','VCFs/VCF_csv/ED14.csv','VCFs/VCF_csv/ED15.csv','VCFs/VCF_csv/ED16.csv',
 'VCFs/VCF_csv/ED17.csv','VCFs/VCF_csv/ED18.csv','VCFs/VCF_csv/ED19.csv','VCFs/VCF_csv/ED20.csv',
 'VCFs/VCF_csv/ED21.csv','VCFs/VCF_csv/ED22.csv','VCFs/VCF_csv/ED23.csv','VCFs/VCF_csv/ED24.csv',
-'VCFs/VCF_csv/ED25.csv','VCFs/VCF_csv/ED26.csv',
-]
+'VCFs/VCF_csv/ED25.csv','VCFs/VCF_csv/ED26.csv']
 
 
 #iterate through the list
