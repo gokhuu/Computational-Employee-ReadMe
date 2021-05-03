@@ -40,19 +40,3 @@ for i in list_of_csv:
 	df['Genotype Category'] = genotype_category
 	print(df.head())
 	df.to_csv(i)
-
-'''
-df = pd.read_csv('testing.csv', header=0,index_col=0)
-
-genotype_category = []
-
-for i in range(df.Genotype.shape[0]):
-	s = reference_dict[df.Genotype[i]]
-	t = df.POS[i]
-	
-	genotype_category.append(s)
-
-df['Genotype Category'] = genotype_category
-
-df.to_csv(r'VCFs/VCF_csv/ED1_VCF.csv')
-'''
