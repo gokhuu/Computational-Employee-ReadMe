@@ -16,7 +16,7 @@ cat_features = [i for i in dna.columns]
 encoder = LabelEncoder()
 
 #merge data
-merged = rna.merge(dna, how='outer', left_index = True, right_index=True)
+merged = rna.merge(dna, how='inner', left_index = True, right_index=True)
 merged[cat_features] = merged[cat_features].apply(encoder.fit_transform)
 print(merged.head())
 
