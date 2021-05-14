@@ -6,6 +6,8 @@ Last update: 5/4/2021
 Import a large number of csv files and 
 concat them into one larger dataframe
 '''
+
+#import libraries
 import numpy as np 
 import pandas as pd 
 import matplotlib.pyplot as plt 
@@ -82,47 +84,3 @@ for i in chrm1:
 	temp_df_list.append(temp_df.set_index('CHROM','POS').sort_index())
 
 temp = temp_df_list[0].join(temp_df_list[1:], how='left')
-
-
-'''
-new_df_lst = []
-for i in chromesome_lst:
-	chrm_df_list = [extract_chr(j,i) for j in df_list]
-
-	pos_set = create_pos_set(chrm_df_list)
-
-	temp_df_list = []
-	for j in chrm_df_list:
-		temp_df = add_homo_ref(j,pos_set,i)
-		temp_df_list.append(temp_df)
-
-	temp = pd.concat(temp_df_list, ignore_index=True)
-	new_df_lst.append(temp)
-
-
-
-
-
-
-
-chrm1 = [extract_chr(i,'chr1') for i in df_list]
-pos_nested_list = [i.POS for i in chrm1]
-pos_list =[]
-for i in pos_nested_list:
-	for j in i:
-		pos_list.append(j)
-pos_set = set(pos_list)
-temp = chrm1[0]
-temp_pos_lst = [i for i in temp.POS]
-
-not_in_lst = []
-for i in pos_set:
-	if (i not in temp_pos_lst):
-		not_in_lst.append(i)
-
-to_append = [['chr1', i, 'Homozygous Reference'] for i in not_in_lst]
-col_names = temp.columns
-to_add = pd.DataFrame(to_append, columns=col_names)
-new_temp = pd.concat([temp, to_add])
-print(temp.head())
-'''
