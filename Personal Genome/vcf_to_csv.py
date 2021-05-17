@@ -76,7 +76,7 @@ def convert_genotype(df):
 	return df
 
 list_of_filenames = [
-'/project/umw_elaine_lim/eqtl//project/umw_elaine_lim/eqtl/vcfs/ED1.Filtered.Variants.vcf','/project/umw_elaine_lim/eqtl/project/umw_elaine_lim/eqtl/vcfs/ED2.Filtered.Variants.vcf',
+'/project/umw_elaine_lim/eqtl/vcfs/ED1.Filtered.Variants.vcf','/project/umw_elaine_lim/eqtl/vcfs/ED2.Filtered.Variants.vcf',
 '/project/umw_elaine_lim/eqtl/vcfs/ED3.Filtered.Variants.vcf','/project/umw_elaine_lim/eqtl/vcfs/ED4.Filtered.Variants.vcf','/project/umw_elaine_lim/eqtl/vcfs/ED5.Filtered.Variants.vcf',
 '/project/umw_elaine_lim/eqtl/vcfs/ED6.Filtered.Variants.vcf','/project/umw_elaine_lim/eqtl/vcfs/ED7.Filtered.Variants.vcf',
 '/project/umw_elaine_lim/eqtl/vcfs/ED8.Filtered.Variants.vcf','/project/umw_elaine_lim/eqtl/vcfs/ED9.Filtered.Variants.vcf',
@@ -89,3 +89,5 @@ list_of_filenames = [
 '/project/umw_elaine_lim/eqtl/vcfs/ED22.Filtered.Variants.vcf','/project/umw_elaine_lim/eqtl/vcfs/ED23.Filtered.Variants.vcf',
 '/project/umw_elaine_lim/eqtl/vcfs/ED24.Filtered.Variants.vcf','/project/umw_elaine_lim/eqtl/vcfs/ED25.Filtered.Variants.vcf',
 '/project/umw_elaine_lim/eqtl/vcfs/ED26.Filtered.Variants.vcf']
+
+
