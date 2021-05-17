@@ -28,6 +28,13 @@ chromesome_lst = ['chr1', 'chr2','chr3','chr4','chr5','chr6','chr7',
 'chr8','chr9','chr10','chr11','chr12','chr13','chr14','chr15','chr16',
 'chr17','chr18','chr19','chr20','chr21','chr22','chrX','chrY']
 
+reference_dict = {
+'ED1':'14765x2','ED2':'14763x7','ED3':'14799x1','ED4':'14858x3','ED5':'14746x8','ED6':'14824x13',
+'ED7':'14739x13','ED8':'','ED9':'14710x6','ED10':'14781x16','ED11':'1601','ED12':'1401',
+'ED13':'902','ED14':'901','ED15':'1001','ED16':'BXS0110','ED17':'BXS0111','ED18':'BYS0112',
+'ED19':'BXS0114','ED20':'BXS0115','ED21':'BXS0116','ED22':'BXS0117','ED23':'GM23716','ED24':'GM23720',
+'ED25':'GM25256','ED26':'PGP1'}
+
 #data frame storage list
 def storage_lst(file_lst):
 	lst = []
@@ -70,13 +77,79 @@ def add_homo_ref(df, pos_set,chrm):
 	new_df = pd.concat([df, temp])
 	return new_df
 
+def converge_list(lst):
+	#sort by POS
+	for i in lst:
+		i = i.sort_values(by='POS')
 
+	#create base dataframe to merge onto
+	df = lst[0]
 
+	#create and merge series
+	for i in range(1,len(lst)):
+		temp = lst[i]
+		series = temp.iloc[:,1:]
+
+		df = df.merge(series, on='POS')
+
+	return df
+
+def create_chrm_split(df_lst, chrm_lst):
+	lst = [] #final list
+
+	#iterate through chromosome list
+	for i in chrm_lst:
+		
+		#create chromesome dataframe list
+		temp_lst = [extract_chr(j,i) for j in df_list]
+		
+		#create position set
+		pos_set = create_pos_set(temp_lst)
+
+		#add homozygous reference SNPs
+		temp = [add_homo_ref(j, pos_set, i) for j in temp_lst]
+
+		#append to lst
+		lst.append(temp)
+	
+	return lst
 
 df_list = storage_lst(list_of_csv)
+chrm_split_list = create_chrm_split(df_list, chromesome_lst)
+merged_split_list = [converge_list(i) for i in chrm_split_list]
 
+df = pd.concat(merged_split_list,ignore_index=True)
+df.to_csv(r'SNP_data.csv')
+'''
 chrm1 = [extract_chr(i, chromesome_lst[0]) for i in df_list]
 pos_set = create_pos_set(chrm1)
+for i in chrm1:
+	i = add_homo_ref(i,pos_set, chromesome_lst[0])
+
+test = converge_list(chrm1)
+
+chrm2 = [extract_chr(i, chromesome_lst[1]) for i in df_list]
+pos_set = create_pos_set(chrm2)
+for i in chrm2:
+	i = add_homo_ref(i,pos_set, chromesome_lst[1])
+
+test2 = converge_list(chrm2)
+
+whole = pd.concat([test, test2], ignore_index=True)
+print(whole.head())
+print(whole.tail())
+
+
+test = add_homo_ref(chrm1[0], pos_set, chromesome_lst[0])
+test = test.sort_values(by='POS')
+test_series = test.iloc[:,1:]
+
+
+df = add_homo_ref(chrm1[1], pos_set, chromesome_lst[0])
+df = df.sort_values(by='POS')
+
+new_df = df.merge(test_series,on='POS')
+print(new_df.head())
 
 temp_df_list = []
 for i in chrm1:
@@ -84,3 +157,4 @@ for i in chrm1:
 	temp_df_list.append(temp_df.set_index('CHROM','POS').sort_index())
 
 temp = temp_df_list[0].join(temp_df_list[1:], how='left')
+'''
