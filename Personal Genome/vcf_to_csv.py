@@ -64,7 +64,7 @@ def convert_genotype(df):
 	#reference dictionary
 	reference_dict = {'0|0':'Homozygous Reference', '0|1':'Heterozygous Alternate', 
 					'0|2': 'Heterozygous Alternate 2', '1|1': 'Homozygous Alternate', 
-					'1|2': 'Heterozygous Alternate 2'}
+					'1|2': 'Heterozygous Alternate 1/2'}
 
 	genotype_category = []
 	for i in range(df.Genotype.shape[0]):

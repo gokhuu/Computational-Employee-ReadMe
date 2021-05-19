@@ -1,0 +1,10 @@
+Encode DNA model - dictionary
+
+Exploratory analysis on DNA/RNA model
+EQTL?
+
+PCA on DNA data
+
+
+Run DNA model
+Run Merged model

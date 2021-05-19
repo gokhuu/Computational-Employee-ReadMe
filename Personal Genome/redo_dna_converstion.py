@@ -16,13 +16,13 @@ from collections import Counter
 from functools import reduce
 
 list_of_csv = [
-'VCFs/VCF_csv/ED1.csv','VCFs/VCF_csv/ED2.csv','VCFs/VCF_csv/ED3.csv','VCFs/VCF_csv/ED4.csv',
-'VCFs/VCF_csv/ED5.csv','VCFs/VCF_csv/ED6.csv','VCFs/VCF_csv/ED7.csv','VCFs/VCF_csv/ED8.csv',
-'VCFs/VCF_csv/ED9.csv','VCFs/VCF_csv/ED10.csv','VCFs/VCF_csv/ED11.csv','VCFs/VCF_csv/ED12.csv',
-'VCFs/VCF_csv/ED13.csv','VCFs/VCF_csv/ED14.csv','VCFs/VCF_csv/ED15.csv','VCFs/VCF_csv/ED16.csv',
-'VCFs/VCF_csv/ED17.csv','VCFs/VCF_csv/ED18.csv','VCFs/VCF_csv/ED19.csv','VCFs/VCF_csv/ED20.csv',
-'VCFs/VCF_csv/ED21.csv','VCFs/VCF_csv/ED22.csv','VCFs/VCF_csv/ED23.csv','VCFs/VCF_csv/ED24.csv',
-'VCFs/VCF_csv/ED25.csv','VCFs/VCF_csv/ED26.csv']
+'VCFs/VCF_csv_2/ED1.csv','VCFs/VCF_csv_2/ED2.csv','VCFs/VCF_csv_2/ED3.csv','VCFs/VCF_csv_2/ED4.csv',
+'VCFs/VCF_csv_2/ED5.csv','VCFs/VCF_csv_2/ED6.csv','VCFs/VCF_csv_2/ED7.csv','VCFs/VCF_csv_2/ED8.csv',
+'VCFs/VCF_csv_2/ED9.csv','VCFs/VCF_csv_2/ED10.csv','VCFs/VCF_csv_2/ED11.csv','VCFs/VCF_csv_2/ED12.csv',
+'VCFs/VCF_csv_2/ED13.csv','VCFs/VCF_csv_2/ED14.csv','VCFs/VCF_csv_2/ED15.csv','VCFs/VCF_csv_2/ED16.csv',
+'VCFs/VCF_csv_2/ED17.csv','VCFs/VCF_csv_2/ED18.csv','VCFs/VCF_csv_2/ED19.csv','VCFs/VCF_csv_2/ED20.csv',
+'VCFs/VCF_csv_2/ED21.csv','VCFs/VCF_csv_2/ED22.csv','VCFs/VCF_csv_2/ED23.csv','VCFs/VCF_csv_2/ED24.csv',
+'VCFs/VCF_csv_2/ED25.csv','VCFs/VCF_csv_2/ED26.csv']
 
 chromesome_lst = ['chr1', 'chr2','chr3','chr4','chr5','chr6','chr7',
 'chr8','chr9','chr10','chr11','chr12','chr13','chr14','chr15','chr16',
@@ -120,41 +120,3 @@ merged_split_list = [converge_list(i) for i in chrm_split_list]
 
 df = pd.concat(merged_split_list,ignore_index=True)
 df.to_csv(r'SNP_data.csv')
-'''
-chrm1 = [extract_chr(i, chromesome_lst[0]) for i in df_list]
-pos_set = create_pos_set(chrm1)
-for i in chrm1:
-	i = add_homo_ref(i,pos_set, chromesome_lst[0])
-
-test = converge_list(chrm1)
-
-chrm2 = [extract_chr(i, chromesome_lst[1]) for i in df_list]
-pos_set = create_pos_set(chrm2)
-for i in chrm2:
-	i = add_homo_ref(i,pos_set, chromesome_lst[1])
-
-test2 = converge_list(chrm2)
-
-whole = pd.concat([test, test2], ignore_index=True)
-print(whole.head())
-print(whole.tail())
-
-
-test = add_homo_ref(chrm1[0], pos_set, chromesome_lst[0])
-test = test.sort_values(by='POS')
-test_series = test.iloc[:,1:]
-
-
-df = add_homo_ref(chrm1[1], pos_set, chromesome_lst[0])
-df = df.sort_values(by='POS')
-
-new_df = df.merge(test_series,on='POS')
-print(new_df.head())
-
-temp_df_list = []
-for i in chrm1:
-	temp_df = add_homo_ref(i,pos_set,chromesome_lst[0])
-	temp_df_list.append(temp_df.set_index('CHROM','POS').sort_index())
-
-temp = temp_df_list[0].join(temp_df_list[1:], how='left')
-'''
