@@ -17,23 +17,32 @@ from functools import reduce
 
 list_of_csv = [
 'VCFs/VCF_csv_2/ED1.csv','VCFs/VCF_csv_2/ED2.csv','VCFs/VCF_csv_2/ED3.csv','VCFs/VCF_csv_2/ED4.csv',
-'VCFs/VCF_csv_2/ED5.csv','VCFs/VCF_csv_2/ED6.csv','VCFs/VCF_csv_2/ED7.csv','VCFs/VCF_csv_2/ED8.csv',
-'VCFs/VCF_csv_2/ED9.csv','VCFs/VCF_csv_2/ED10.csv','VCFs/VCF_csv_2/ED11.csv','VCFs/VCF_csv_2/ED12.csv',
-'VCFs/VCF_csv_2/ED13.csv','VCFs/VCF_csv_2/ED14.csv','VCFs/VCF_csv_2/ED15.csv','VCFs/VCF_csv_2/ED16.csv',
-'VCFs/VCF_csv_2/ED17.csv','VCFs/VCF_csv_2/ED18.csv','VCFs/VCF_csv_2/ED19.csv','VCFs/VCF_csv_2/ED20.csv',
-'VCFs/VCF_csv_2/ED21.csv','VCFs/VCF_csv_2/ED22.csv','VCFs/VCF_csv_2/ED23.csv','VCFs/VCF_csv_2/ED24.csv',
-'VCFs/VCF_csv_2/ED25.csv','VCFs/VCF_csv_2/ED26.csv']
+'VCFs/VCF_csv_2/ED5.csv','VCFs/VCF_csv_2/ED6.csv','VCFs/VCF_csv_2/ED7.csv','VCFs/VCF_csv_2/ED9.csv',
+'VCFs/VCF_csv_2/ED10.csv','VCFs/VCF_csv_2/ED11.csv','VCFs/VCF_csv_2/ED12.csv','VCFs/VCF_csv_2/ED13.csv',
+'VCFs/VCF_csv_2/ED14.csv','VCFs/VCF_csv_2/ED15.csv','VCFs/VCF_csv_2/ED16.csv','VCFs/VCF_csv_2/ED17.csv',
+'VCFs/VCF_csv_2/ED18.csv','VCFs/VCF_csv_2/ED19.csv','VCFs/VCF_csv_2/ED20.csv','VCFs/VCF_csv_2/ED21.csv',
+'VCFs/VCF_csv_2/ED22.csv','VCFs/VCF_csv_2/ED23.csv','VCFs/VCF_csv_2/ED24.csv','VCFs/VCF_csv_2/ED25.csv',
+'VCFs/VCF_csv_2/ED26.csv']
 
 chromesome_lst = ['chr1', 'chr2','chr3','chr4','chr5','chr6','chr7',
 'chr8','chr9','chr10','chr11','chr12','chr13','chr14','chr15','chr16',
 'chr17','chr18','chr19','chr20','chr21','chr22','chrX','chrY']
 
+'''
 reference_dict = {
 'ED1':'14765x2','ED2':'14763x7','ED3':'14799x1','ED4':'14858x3','ED5':'14746x8','ED6':'14824x13',
 'ED7':'14739x13','ED8':'','ED9':'14710x6','ED10':'14781x16','ED11':'1601','ED12':'1401',
 'ED13':'902','ED14':'901','ED15':'1001','ED16':'BXS0110','ED17':'BXS0111','ED18':'BYS0112',
 'ED19':'BXS0114','ED20':'BXS0115','ED21':'BXS0116','ED22':'BXS0117','ED23':'GM23716','ED24':'GM23720',
 'ED25':'GM25256','ED26':'PGP1'}
+'''
+new_csv_lst = ['VCFs/chrm_split/chr1.csv', 'VCFs/chrm_split/chr2.csv','VCFs/chrm_split/chr3.csv','VCFs/chrm_split/chr4.csv','VCFs/chrm_split/chr5.csv',
+'VCFs/chrm_split/chr6.csv','VCFs/chrm_split/chr7.csv','VCFs/chrm_split/chr8.csv','VCFs/chrm_split/chr9.csv','VCFs/chrm_split/chr10.csv',
+'VCFs/chrm_split/chr11.csv','VCFs/chrm_split/chr12.csv','VCFs/chrm_split/chr13.csv',
+'VCFs/chrm_split/chr14.csv','VCFs/chrm_split/chr15.csv','VCFs/chrm_split/chr16.csv','VCFs/chrm_split/chr17.csv','VCFs/chrm_split/chr18.csv',
+'VCFs/chrm_split/chr19.csv',
+'VCFs/chrm_split/chr20.csv','VCFs/chrm_split/chr21.csv','VCFs/chrm_split/chr22.csv','VCFs/chrm_split/chrX.csv','VCFs/chrm_split/chrY.csv']
+
 
 #data frame storage list
 def storage_lst(file_lst):
@@ -118,5 +127,10 @@ df_list = storage_lst(list_of_csv)
 chrm_split_list = create_chrm_split(df_list, chromesome_lst)
 merged_split_list = [converge_list(i) for i in chrm_split_list]
 
+#create chrm csv files
+for i in range(len(new_csv_lst)):
+	merged_split_list[i].to_csv(new_csv_lst[i])
+
+
 df = pd.concat(merged_split_list,ignore_index=True)
-df.to_csv(r'SNP_data.csv')
+#df.to_csv(r'SNP_data.csv')

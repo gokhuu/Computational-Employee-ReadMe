@@ -1,73 +1,77 @@
 import numpy as np 
 import pandas as pd
+csv_lst = ['VCFs/chrm_split/chr1.csv', 'VCFs/chrm_split/chr2.csv','VCFs/chrm_split/chr3.csv','VCFs/chrm_split/chr4.csv','VCFs/chrm_split/chr5.csv',
+'VCFs/chrm_split/chr6.csv','VCFs/chrm_split/chr7.csv','VCFs/chrm_split/chr8.csv','VCFs/chrm_split/chr9.csv','VCFs/chrm_split/chr10.csv',
+'VCFs/chrm_split/chr11.csv','VCFs/chrm_split/chr12.csv','VCFs/chrm_split/chr13.csv','VCFs/chrm_split/chr14.csv','VCFs/chrm_split/chr15.csv',
+'VCFs/chrm_split/chr16.csv','VCFs/chrm_split/chr17.csv','VCFs/chrm_split/chr18.csv','VCFs/chrm_split/chr19.csv','VCFs/chrm_split/chr20.csv',
+'VCFs/chrm_split/chr21.csv','VCFs/chrm_split/chr22.csv','VCFs/chrm_split/chrX.csv','VCFs/chrm_split/chrY.csv']
 
-#rna = pd.read_csv('new_fpkm_threshold.csv',header=0, index_col=0, low_memory=False)
-dna = pd.read_csv('SNP_data.csv',header=0,low_memory=False)
+new_csv_lst = ['VCFs/chrm_split/chr1_replicates.csv', 'VCFs/chrm_split/chr2_replicates.csv','VCFs/chrm_split/chr3_replicates.csv','VCFs/chrm_split/chr4_replicates.csv','VCFs/chrm_split/chr5_replicates.csv',
+'VCFs/chrm_split/chr6_replicates.csv','VCFs/chrm_split/chr7_replicates.csv','VCFs/chrm_split/chr8_replicates.csv','VCFs/chrm_split/chr9_replicates.csv','VCFs/chrm_split/chr10_replicates.csv',
+'VCFs/chrm_split/chr11_replicates.csv','VCFs/chrm_split/chr12_replicates.csv','VCFs/chrm_split/chr13_replicates.csv','VCFs/chrm_split/chr14_replicates.csv','VCFs/chrm_split/chr15_replicates.csv',
+'VCFs/chrm_split/chr16_replicates.csv','VCFs/chrm_split/chr17_replicates.csv','VCFs/chrm_split/chr18_replicates.csv','VCFs/chrm_split/chr19_replicates.csv','VCFs/chrm_split/chr20_replicates.csv',
+'VCFs/chrm_split/chr21_replicates.csv','VCFs/chrm_split/chr22_replicates.csv','VCFs/chrm_split/chrX_replicates.csv','VCFs/chrm_split/chrY_replicates.csv']
 
-#Transpose and edit DNA dataframe
-ref = {'110-1':'BXS0110-1','110-2':'BXS0110-2','110-3':'BXS0110-3',
-		'111-1':'BXS0111-1','111-2':'BXS0111-2','111-3':'BXS0111-3',
-       '112-1':'BYS0112-1','112-2':'BYS0112-2','112-3':'BYS0112-3',
-       '114-1':'BXS0114-1','114-2':'BXS0114-2','114-3':'BXS0114-3',
-       '115-1':'BXS0115-1','115-2':'BXS0115-2','115-3':'BXS0115-3',
-       '116-1':'BXS0116-1','116-2':'BXS0116-2','116-3':'BXS0116-3',
-       '117-1':'BXS0117-1','117-2':'BXS0117-2','117-3':'BXS0117-3'}
+def storage_lst(file_lst):
+	lst = []
+	for i in file_lst:
+		df = pd.read_csv(i, header=0, index_col=0)
+		lst.append(df)
+	return lst
 
-reference_dict = {'Homozygous Reference':'0', 'Heterozygous Alternate':'1', 
-					'Heterozygous Alternate 2':'3','Homozygous Alternate':'2'}
+def add_replicates(df):
+	cols = df.iloc[:,2:]
+
+	for i in cols.columns:
+		if i == '14710x6':
+			df.rename(columns={'14710x6': '14710x6-1'},inplace=True)
+		elif i == '14746x8':
+			t2 = list(df.get(i))
+			s2 = i+'-2'
+			df.rename(columns={'14746x8': '14746x8-1'},inplace=True)
+			df.insert(loc=0, column=s2, value=t2)
+		elif i == i =='14739x3':
+			t2 = list(df.get(i))
+			s2 = i+'-2'
+			df.rename(columns={'14739x3': '14739x3-1'},inplace=True)
+			df.insert(loc=0, column=s2, value=t2)
+		else:
+			t2 = list(df.get(i))
+			t3 = list(df.get(i))
+			s1 = i+'-1'
+			s2 = i+'-2'
+			s3 = i+'-3'
+			df.rename(columns={i: s1},inplace=True)
+			df.insert(loc=0, column=s2, value=t2)
+			df.insert(loc=0, column=s3, value=t2)
+
+	chrom = df.pop('CHROM')
+	pos = df.pop('POS')
+	df.insert(loc=0, column='POS', value=pos)
+	df.insert(loc=0, column='CHROM', value=chrom)
+	return df
 
 
-dna = dna.drop('0',axis=1)
+def fix_col_name (df):
 
-dna.rename(columns=ref, inplace=True)
-chrmPos = []
+	for i in df.columns:
+		temp = i
+		
+		for j in range(len(temp)):
+			if j == '-':
+				s = temp[:j]
+				df.rename(column={i:s},inplace=True)
+	return df
 
-for i in range(dna.shape[0]):
-	s = str(dna.CHROM[i]) + "@" + str(dna.POS[i])
-	chrmPos.append(s)
+df_list = storage_lst(csv_lst)
 
-dna.insert(loc=0, column='Samples', value=chrmPos)
+for i in df_list:
+	i = fix_col_name(i)
 
-dna = dna.drop(['CHROM','POS'], axis=1)
-dna = dna.set_index('Samples')
-dna = dna.T
-#print(dna.head())
-#Merge dataframes
-#df = rna.merge(dna, how='left', left_index=True, right_index=True)
-
-#remove SNPs that are all Homo Ref
-
-same = []
-count = 0
-for i in dna.columns:
-	temp = dna.get(i)
-	#count = 0
-	for j in temp:
-		if j == 'Heterozygous Alternate 2':
-			count+=1
-	#if count >= 69:
-print(count)
-
-#dna = dna.drop(same, axis=1)
-#print(dna.head())
-
+print(df_list[2].columns)
 '''
-to_drop = []
-for i in dna.columns:
-	temp = dna.get(i)
-	count = 0
-	for j in temp:
-		if j != 'Homozygous Reference':
-			count+=1
-	if count <= 25:
-		to_drop.append(i)
-dna = dna.drop(to_drop, axis=1)
-print(dna.head())
-
-
-#Encode DNA columns
-from sklearn.preprocessing import LabelEncoder
-encoder = LabelEncoder()
-cat_features = [i for i in dna.columns]
-dna[cat_features] = dna[cat_features].apply(encoder.fit_transform)
+for i in df_list:
+	i = add_replicates(i)
 '''
+for i in range(len(csv_lst)):
+	df_list[i].to_csv(new_csv_lst[i])
