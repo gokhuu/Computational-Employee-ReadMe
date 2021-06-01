@@ -1,5 +1,6 @@
 import numpy as np 
 import pandas as pd 
+import allel as al
 
 lst = ['chr1_replicates.csv', 'chr2_replicates.csv','chr3_replicates.csv','chr4_replicates.csv','chr5_replicates.csv',
 'chr6_replicates.csv','chr7_replicates.csv','chr8_replicates.csv','chr9_replicates.csv','chr10_replicates.csv',
@@ -28,30 +29,50 @@ ind_list = ['PGP1-1', 'PGP1-2', 'PGP1-3', 'GM23716-1', 'GM23716-2',
 '14765x2-1', '14765x2-2', '14765x2-3', '14710x6-1', '14781x16-1', '14781x16-2', 
 '14781x16-3', '14746x8-1', '14746x8-2']
 
-	
-df_lst = []
-for i in range(len(lst)):
-	temp = pd.read_csv(lst[i], header=0, index_col=0)
 
-	chrmPos = []
-	for i in range(temp.shape[0]):
-	    s = str(temp.CHROM[i]) + '@' + str(temp.POS[i])
-	    chrmPos.append(s)
-	    
-	#append to dataframe and prep for analysis
-	temp.insert(loc=0, column='Samples', value=chrmPos)
-	temp = temp.drop(['CHROM','POS'], axis=1)
-	temp = temp.set_index('Samples')
-	temp = temp.T
+df = pd.read_csv(lst[0], header=0, index_col=0)
+cols_to_drop=['PGP1-3', 'PGP1-2', 'GM25256-3', 'GM25256-2',
+       'GM23720-3', 'GM23720-2', 'GM23716-3', 'GM23716-2', 'BXS0117-3',
+       'BXS0117-2', 'BXS0116-3', 'BXS0116-2', 'BXS0115-3', 'BXS0115-2',
+       'BXS0114-3', 'BXS0114-2', 'BYS0112-3', 'BYS0112-2', 'BXS0111-3',
+       'BXS0111-2', 'BXS0110-3', 'BXS0110-2', '1001-3', '1001-2', '901-3',
+       '901-2', '902-3', '902-2', '1401-3', '1401-2', '1601-3', '1601-2',
+       '14781x16-3', '14781x16-2', '14739x3-2', '14824x13-3', '14824x13-2',
+       '14746x8-2', '14858x3-3', '14858x3-2', '14799x1-3', '14799x1-2',
+       '14763x7-3', '14763x7-2', '14765x2-3', '14765x2-2']
+df = df.drop(cols_to_drop, axis=1)
 
-	reference_dict = {'Homozygous Reference':0, 'Heterozygous Alternate':1, 
-						'Heterozygous Alternate 1/2':2,'Homozygous Alternate':3}
+chrmPos = []
+for i in range(df.shape[0]):
+    s = str(df.CHROM[i]) + '@' + str(df.POS[i])
+    chrmPos.append(s)
+    
+#append to dataframe and prep for analysis
+df.insert(loc=0, column='Samples', value=chrmPos)
+df = df.drop(['CHROM','POS'], axis=1)
+df = df.set_index('Samples')
+df = df.T
 
-	temp = temp.replace(reference_dict)
 
+reference_dict = {'Homozygous Reference':[0,0], 'Heterozygous Alternate':[0,1], 
+					'Heterozygous Alternate 1/2':[0,2],'Homozygous Alternate':[1,1]}
 
-	temp  = temp.reindex(ind_list)
-	df_lst.append(temp)
+#df = df.replace(reference_dict)
 
-for i in range(len(new_lst)):
-	df_lst[i].to_csv(new_lst[i])
+#print(df.head())
+gt_array =[]
+
+for i in df.index:
+	temp = []
+	for j in df.loc[i]:
+		temp.append(reference_dict[j])
+	gt_array.append(temp)
+
+g = al.GenotypeArray(gt_array)
+
+print('Heterozygosity observed: ')
+print(al.heterozygosity_observed(g)) 
+print("")
+
+af = g.count_alleles().to_frequencies()
+print(al.heterozygosity_expected(af,ploidy=2))
