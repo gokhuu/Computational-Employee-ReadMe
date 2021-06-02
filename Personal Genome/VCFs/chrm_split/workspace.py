@@ -70,9 +70,18 @@ for i in df.index:
 
 g = al.GenotypeArray(gt_array)
 
+print(gt_array)
+'''
 print('Heterozygosity observed: ')
 print(al.heterozygosity_observed(g)) 
 print("")
 
-af = g.count_alleles().to_frequencies()
-print(al.heterozygosity_expected(af,ploidy=2))
+gn = g.to_n_alt(fill=-1)
+
+r = al.rogers_huff_r(gn)
+
+from scipy.spatial.distance import squareform
+print('')
+print('linkage disequalibirium')
+print(squareform(r**2))
+'''
