@@ -47,8 +47,8 @@ host ev001
 ```
 *Note: wenglab is who Rigel and Elaine are renting the space from*
 
-4. SSH into the server the first time to and you will be prompted to reset your password
-######Enter you password followed by the authenticator with no space inbetween. Type the authenticator with no dashes just the numbers
+4. SSH into the server the first time to and you will be prompted to reset your password<br>
+**Enter you password followed by the authenticator with no space inbetween. Type the authenticator with no dashes just the numbers**
 
 
 ##### Directions for Windows 
