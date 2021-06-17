@@ -28,7 +28,7 @@ Rigel and Elaine are most familiar with R and Perl; however, they have no prefer
 3. Read through the email for first time login instructions
 
 #### BIB
-1. Email arjan.vandervelde@umassmed.edu and michael.purcaro@umassmed.edu to have your BIB server account set up
+1. Elaine will email arjan.vandervelde@umassmed.edu and michael.purcaro@umassmed.edu to have your BIB server account set up
 2. Download Google Authenticator from App Store onto your phone, you will need it scan the QR code the send you
 
 *See below depending on your OS*
