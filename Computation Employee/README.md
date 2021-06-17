@@ -24,7 +24,10 @@ Rigel and Elaine are most familiar with R and Perl; however, they have no prefer
 ### Setting up your accounts
 #### MGHPCC
 1. Fill out the account request form: https://www.umassrc.org/hpc/index.php
-2. For windows: download putty or Ubuntu for windows, if you are using a Mac/Linux you can just SSH to the server
+2. For windows: download putty or Ubuntu for windows(WSL) , if you are using a Mac/Linux you can just SSH to the server
+        - Putty link: https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html
+        - WSL https://www.microsoft.com/en-us/p/ubuntu/9nblggh4msv6?activetab=pivot:overviewtab
+        
 3. Read through the email for first time login instructions
 
 #### BIB
