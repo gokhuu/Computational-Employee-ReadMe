@@ -2,7 +2,7 @@
 
 ## Table of Contents
 * [Introduction](#Introduction)
-* [Getting Set up](#GettingSetup)
+* [Getting Set up](#Getting Set up)
 * [MGHPCC](#MGHPCC)
 * [BIB](#BIB)
 
@@ -30,7 +30,7 @@ Rigel and Elaine are most familiar with R and Perl; however, they have no prefer
 1. Email arjan.vandervelde@umassmed.edu and michael.purcaro@umassmed.edu to have your BIB server account set up
 2. Download Google Authenticator from App Store onto your phone, you will need it scan the QR code the send you
 
-*See below depending on you OS*
+*See below depending on your OS*
 
 ##### Directions for MAC/Linux
 3. Create .ssh/config file
@@ -48,11 +48,24 @@ host ev001
 *Note: wenglab is who Rigel and Elaine are renting the space from*
 
 4. SSH into the server the first time to and you will be prompted to reset your password<br>
-**Enter you password followed by the authenticator with no space inbetween. Type the authenticator with no dashes just the numbers**
+**Enter you password followed by the authenticator with no space inbetween. <br>
+Type the authenticator with no dashes just the numbers**
 
 
 ##### Directions for Windows 
+3. You cannot use Putty for the BIB server. Download Ubuntu for windows from the Microsoft store
+4. Create the .ssh directory
+5. Create the .ssh/config file (same file as above)
+6. SSH into the server the first time to and you will be prompted to reset your password<br>
+**Enter you password followed by the authenticator with no space inbetween. <br>
+Type the authenticator with no dashes just the numbers**
 
 ## MGHPCC
+#### Introduction
+#### Storage
+#### Submitting a job
+#### File Transfer
 
 ## BIB
+#### Introduction
+#### File Transfer
