@@ -4,9 +4,15 @@ import pandas as pd
 import matplotlib.pyplot as plt 
 import seaborn as sns
 
-df15 = pd.read_excel('16p11_fpkm.xlsx', header=0,index_col=0,engine='openpyxl')
+df = pd.read_csv('workspace.csv',header=0)
 
-subset = df15.iloc[:,:59]
+gene = list(df.gene)
 
-print(subset.head())
-subset.to_csv(r'16p11_fpkm_rep.csv')
+ref = list(df.Ref)
+
+comp = list(df.new)
+comp = comp[:11205]
+
+d = {i:j for i in ref for j in gene}
+
+lst = [d[i] for i in comp]

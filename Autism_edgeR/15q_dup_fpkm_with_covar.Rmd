@@ -6,7 +6,7 @@ output: html_document
 ---
 #load working directory and library
 ```{r setup, include=FALSE}
-setwd("C:/Users/khuub/One Drive/OneDrive/Desktop/Projects/projects/Autism_edgeR/")
+#setwd("C:/Users/khuub/One Drive/OneDrive/Desktop/Projects/projects/Autism_edgeR/")
 library(edgeR)
 ```
 
@@ -45,5 +45,5 @@ topTags(de.com)
 #output pvalue
 
 ```{r}
-write.csv(de.com$table$pval,"15q_dup_pval_covar_redo.csv")
-write.csv(de.come$table,"15q_dup_covar_full_table.csvR")
+#write.csv(de.com$table$pval,"15q_dup_pval_covar_redo.csv")
+#write.csv(de.come$table,"15q_dup_covar_full_table.csvR")
