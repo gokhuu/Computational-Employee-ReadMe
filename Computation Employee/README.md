@@ -2,7 +2,7 @@
 
 ## Table of Contents
 * [Introduction](#Introduction)
-* [Getting Set up](#Getting Set up)
+* [Getting Set up](#Getting-Set-up)
 * [MGHPCC](#MGHPCC)
 * [BIB](#BIB)
 
@@ -65,7 +65,9 @@ Type the authenticator with no dashes just the numbers**
 #### Storage
 #### Submitting a job
 #### File Transfer
+#### Support
 
 ## BIB
 #### Introduction
 #### File Transfer
+#### Support
