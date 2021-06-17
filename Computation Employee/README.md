@@ -32,7 +32,7 @@ Rigel and Elaine are most familiar with R and Perl; however, they have no prefer
 
 *See below depending on your OS*
 
-##### Directions for MAC/Linux
+##### __Directions for MAC/Linux__
 3. Create .ssh/config file
 ```bash
 host ev001
@@ -52,7 +52,7 @@ host ev001
 Type the authenticator with no dashes just the numbers**
 
 
-##### Directions for Windows 
+##### __Directions for Windows__ 
 3. You cannot use Putty for the BIB server. Download Ubuntu for windows from the Microsoft store
 4. Create the .ssh directory
 5. Create the .ssh/config file (same file as above)
