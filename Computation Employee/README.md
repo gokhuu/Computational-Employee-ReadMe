@@ -5,6 +5,7 @@
 * [Getting Set up](#Getting-Set-up)
 * [MGHPCC](#MGHPCC)
 * [BIB](#BIB)
+* [Advice](#Advice)
 
 ## Introduction
 Hello!<br>
@@ -62,12 +63,72 @@ Type the authenticator with no dashes just the numbers**
 
 ## MGHPCC
 #### Introduction
-#### Storage
+As aforementioned, the MGHPCC cluster will be used for computing.  There are different queues to submit your job under: Short, Long, GPU, Interactive.  The short queue is for jobs less than 4 hours.  The long queue is are jobs up to 8 hours.  The GPU queue is for jobs that require GPU acceleration.  The interactive queue is unique in that it pulls up a terminal for you to run interactive scripts, but you can also use to run other things, I will go further into this below.
+
+#### Data Storage
+In your home directory, you are allowed 50gbs of space, do with it what you want.  I used it to store scripts.  The project data the Elaine/Rigel will give you will be under their project space: **/project/umw_elaine_lim** and **/project/umw_yingleong_chan**<br>
+
+Those two directories will have their respective PI data that they are currently working on. If they ask you to look at something from an older project, it will be on the BIB server.
+
 #### Submitting a job
+If you don't want to bother with what I have to say: https://www.umassrc.org/wiki/index.php/Main_Page <br>
+The MGHPCC has a wiki page that can answer some question about server usage and how to submit a job.
+In you first email they will also provide examples on how to submit a job.
+
+A sample job submission would look something like this
+```bash
+bsub -q long -n 2 -W 8:00 -R rusage[mem=2048] hostname 
+```
+bsub = the command to submit a job<br>
+q = which queue are you using: short, long, GPU, interactive<br>
+n = number of cores<br>
+W = length of time you are allocating for you job<br>
+R rusage = amount of memory allocated for the job<br>
+hostname = insert job name or bash command
+
+I created a bash script with all this and then just changed the hostname to whatever script I would run instead of just typing it out everytime.
+
+If you job requires a module ie. Python3, R, etc. you must load those prior to submitting the job.
+You can see what modules the cluster has:
+```bash
+module avail
+```
+or if you want to see what Python3 modules the cluster has:
+```bash
+module avail Python3
+```
+This way all the modules with Python3 in the name will be listed instead of all the module.  Use this method to search for needed modules.
+
+
 #### File Transfer
+FileZilla can be used to pull data from the cluster to work with on your local computer.
+https://filezilla-project.org/download.php?type=client
+
 #### Support
+If you have any issues with the cluster you can email: hpcc-support@umassmed.edu
 
 ## BIB
 #### Introduction
+This server is used in the lab as long term data storage.  Elaine and Rigel's older project data will be stored on this server. I did not work with Rigel's older data, so I do not know the directory his old data is in.  Elaine's older data is in **/data/elim/**
+
 #### File Transfer
+Unlike the MGPHCC cluster, you cannot use FileZilla to move files on and off the server.  You must scp files.  Before you can scp you must first edit you config file.
+```bash
+        Controlpath /home/[whatever you user is]/.ssh/sockets/%r@%h:%p
+        ControlPersist 15s
+```
+Add these two lines to the bottom of your config file.<br>
+Make the directory .ssh/sockets.<br>
+
+* For windows:
+	- Open PowerShell
+	- <code> scp -r user@ev001:/home/source/file_or_directory .</code>
+	- The period will make the target directory your home folder
+	
+* For Mac/Linux:
+	- Open Terminal
+	- <code> scp -r user@ev001:/home/source/file_or_directory .</code>
+	- The period will make the target directory your home folder
 #### Support
+
+## Advice
