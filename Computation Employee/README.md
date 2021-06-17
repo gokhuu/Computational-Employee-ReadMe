@@ -124,11 +124,22 @@ Make the directory .ssh/sockets.<br>
 	- Open PowerShell
 	- <code> scp -r user@ev001:/home/source/file_or_directory .</code>
 	- The period will make the target directory your home folder
-	
+
 * For Mac/Linux:
 	- Open Terminal
 	- <code> scp -r user@ev001:/home/source/file_or_directory .</code>
 	- The period will make the target directory your home folder
 #### Support
+Contact arjan.vandervelde@umassmed.edu and michael.purcaro@umassmed.edu if you have any questions or concerns.  They are very nice, helpful, and responsive.
 
 ## Advice
+This section will be some unsolicited advice, you can choose to skip this section, but I will write down what I think is useful information and other issues I ran into while working here.
+
+* Python3 on the MGPHCC
+You can use the load the modules normally and submit jobs, but a lot the Python3 modules are corrupt or don't function correctly.  I had been email the cluster admin back and forth and we couldn't find out the reason why.  To solve this, I used the interactive node and to create an anaconda virtual environment and then download the packages/libraries that way.  It was more reliable for me and had less issues.
+
+* Working Locally
+I am just used to working on an IDE so I worked on all my programs locally.  I know Rigel and Elaine work mostly on terminal, but I found it harder.  I would just get a proof of concept running on my local machine then just load the script I wrote onto the cluster and run it that way.  You have the freedom to use whatever workflow you feel is best for you.
+
+* R on the cluster
+Personally didn't feel the need to run on the cluster, but I do know there are slighly different steps to do so.  I would recommend contacting the mghpcc admin for help on that.
